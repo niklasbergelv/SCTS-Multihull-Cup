@@ -9,8 +9,12 @@ from openpyxl.styles import Font, Fill, PatternFill
 from openpyxl.utils import get_column_letter
 from operator import itemgetter
 import logging
+import time
 
-logging.basicConfig(filename='total_result_2018.log',level=logging.DEBUG, format='%(asctime)s %(message)s')
+ts = time.gmtime()
+timeStamp = time.strftime("%Y-%m-%d %H:%M:%S", ts)
+
+logging.basicConfig(filename='total_result.log',level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 conn = sqlite3.connect('SCTS_SRS.db')
 c = conn.cursor()
@@ -383,8 +387,8 @@ for sheet in wb.sheetnames:
         worksheet.column_dimensions[get_column_letter(i + 1)].width = column_width
    
         
-              
-wb.save("SCTS_RACES_2018-12-28.xlsx")        
+wb.save("{}{}{}" . format("SCTS_RACES_", timeStamp, ".xlsx"))              
+#wb.save("SCTS_RACES_2018-12-28.xlsx")        
             
     
 conn.close()
